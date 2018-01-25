@@ -45,4 +45,13 @@ public enum Board {
         return null;
     }
 
+    public static void showBoard() {
+        for (Position[] i : Board.BOARD.getInstance()) {
+            for (Position j : i) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
+    }
+
 }
