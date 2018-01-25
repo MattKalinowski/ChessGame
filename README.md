@@ -4,9 +4,9 @@ The following project is a classic chess game.
 
 ## Built With
 
-* [Spring Boot](https://projects.spring.io/spring-boot/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [JUnit](http://junit.org/junit5/) & [Mockito](http://site.mockito.org) - Testing
+* [IntelliJ IDEA](https://www.jetbrains.com/idea/)
+* [Maven](https://maven.apache.org/)
+* [JUnit](http://junit.org/junit5/)
 
 ## Author
 
