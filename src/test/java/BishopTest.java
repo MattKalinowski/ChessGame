@@ -1,7 +1,7 @@
 import Application.ChessPieces.Bishop;
+import Application.ChessPieces.Pawn;
+import Application.ChessPieces.Phantom;
 import Application.ChessPieces.Team;
-import Application.Chessboard.Board;
-import Application.Chessboard.Ownership;
 import Application.Chessboard.Position;
 import org.junit.Test;
 
@@ -28,15 +28,6 @@ public class BishopTest {
         bishop.move('h', 8);
         assertEquals("[h,8]", bishop.getPosition().toString());
     }
-    @Test
-    public void testMovementWhileCaptured() {
-        Bishop bishop = new Bishop(WHITE);
-        Position position = BOARD.getPosition('a', 8);
-        bishop.setPosition(position);
-        bishop.setCaptured();
-        bishop.move('b', 7);
-        assertEquals("[a,8]", bishop.getPosition().toString());
-    }
 
     @Test
     public void testMovementWithObstacle() {
@@ -61,9 +52,9 @@ public class BishopTest {
         Bishop bishop = new Bishop(WHITE);
         Position position = BOARD.getPosition('c', 8);
         bishop.setPosition(position);
-        BOARD.getPosition('d',7).setOwner(Ownership.WHITE);
+        BOARD.getPosition('d',7).setChessman(new Pawn(WHITE));
         bishop.move('d', 7);
-        BOARD.getPosition('d',7).setOwner(Ownership.NEUTRAL);
+        BOARD.getPosition('d',7).setChessman(new Phantom());
         assertEquals("[c,8]", bishop.getPosition().toString());
     }
 

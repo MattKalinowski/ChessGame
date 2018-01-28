@@ -1,7 +1,6 @@
 import Application.ChessPieces.Knight;
-import Application.ChessPieces.Team;
-import Application.Chessboard.Board;
-import Application.Chessboard.Ownership;
+import Application.ChessPieces.Pawn;
+import Application.ChessPieces.Phantom;
 import Application.Chessboard.Position;
 import org.junit.Test;
 
@@ -18,7 +17,7 @@ public class KnightTest {
         Position position = BOARD.getPosition('a', 1);
         knight.setPosition(position);
         knight.move('b', 3);
-        BOARD.getPosition('b',3).setOwner(Ownership.NEUTRAL);
+        BOARD.getPosition('b',3).setChessman(new Phantom());
         assertEquals("[b,3]", knight.getPosition().toString());
     }
 
@@ -29,16 +28,6 @@ public class KnightTest {
         knight.setPosition(position);
         knight.move('c', 2);
         assertEquals("[c,2]", knight.getPosition().toString());
-    }
-
-    @Test
-    public void testMovementWhileCaptured() {
-        Knight knight = new Knight(WHITE);
-        Position position = BOARD.getPosition('a', 1);
-        knight.setPosition(position);
-        knight.setCaptured();
-        knight.move('b', 3);
-        assertEquals("[a,1]", knight.getPosition().toString());
     }
 
     @Test
@@ -64,9 +53,9 @@ public class KnightTest {
         Knight knight = new Knight(WHITE);
         Position position = BOARD.getPosition('e', 1);
         knight.setPosition(position);
-        BOARD.getPosition('f',3).setOwner(Ownership.BLACK);
+        BOARD.getPosition('f',3).setChessman(new Pawn(BLACK));
         knight.move('f', 3);
-        BOARD.getPosition('f',3).setOwner(Ownership.NEUTRAL);
+        BOARD.getPosition('f',3).setChessman(new Phantom());
         assertEquals("[f,3]", knight.getPosition().toString());
     }
 
@@ -75,9 +64,9 @@ public class KnightTest {
         Knight knight = new Knight(WHITE);
         Position position = BOARD.getPosition('e', 5);
         knight.setPosition(position);
-        BOARD.getPosition('d',7).setOwner(Ownership.WHITE);
+        BOARD.getPosition('d',7).setChessman(new Pawn(WHITE));
         knight.move('d', 7);
-        BOARD.getPosition('d',7).setOwner(Ownership.NEUTRAL);
+        BOARD.getPosition('d',7).setChessman(new Phantom());
         assertEquals("[e,5]", knight.getPosition().toString());
     }
 

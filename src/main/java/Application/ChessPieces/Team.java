@@ -1,5 +1,5 @@
 package Application.ChessPieces;
 
 public enum Team {
-    WHITE,BLACK
+    WHITE,BLACK,NEUTRAL
 }

@@ -1,15 +1,18 @@
 package Application.Chessboard;
 
 
+import Application.ChessPieces.Chessman;
+import Application.ChessPieces.Phantom;
+
 public class Position {
     private char x;
     private int y;
-    private Ownership owner;
+    private Chessman chessman;
 
     public Position(char x, int y) {
         this.x = x;
         this.y = y;
-        this.owner = Ownership.NEUTRAL;
+        this.chessman = new Phantom();
     }
 
     public int getX() {
@@ -20,17 +23,17 @@ public class Position {
         return y;
     }
 
-    public Ownership getOwner() {
-        return owner;
+    public Chessman getChessman() {
+        return chessman;
     }
 
-    public void setOwner(Ownership owner) {
-        this.owner = owner;
+    public void setChessman(Chessman chessman) {
+        this.chessman = chessman;
     }
 
     @Override
     public String toString() {
-        return "[" + x +","+ y + "]";
+        return "[" + x +","+ y + "]"; // here, instead of this I can use "[] + chessman + "]"
     }
 }
 

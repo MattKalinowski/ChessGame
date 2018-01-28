@@ -1,6 +1,5 @@
 package Application.ChessPieces;
 
-import Application.Chessboard.Ownership;
 import Application.Chessboard.Position;
 
 import static Application.Chessboard.Board.BOARD;
@@ -10,22 +9,22 @@ public class Bishop implements Chessman {
 
     private Position position;
     private Team team;
-    private boolean captured;
 
     public Bishop(Team team) {
         this.team = team;
     }
 
     public void move(char x, int y) {
-        if (!captured && inBounds(x,y) && isNotAlly(x,y,team) && isPermeableDiagonally(x, y, position))
+        if (inBounds(x,y) && isNotAlly(x,y,team) && isPermeableDiagonally(x, y, position))
             moveScript(x,y);
     }
 
     private void moveScript(char x, int y) {
+        Position target = BOARD.getPosition(x, y);
         if (((Math.abs(position.getX() - x)) == (Math.abs(position.getY() - y)))) {
-            position.setOwner(Ownership.NEUTRAL);
-            setPosition(BOARD.getPosition(x, y));
-            BOARD.getPosition(x, y).setOwner(getOwnership(team));
+            position.setChessman(new Phantom());
+            setPosition(target);
+            target.setChessman(this);
         }
     }
 
@@ -41,13 +40,9 @@ public class Bishop implements Chessman {
         return team;
     }
 
-    public void setCaptured() {
-        this.captured = true;
-    }
-
     @Override
     public String toString() {
-        return team.toString().toLowerCase() + " bishop";
+        return "[" + team.toString().charAt(0) + "B]";
 
     }
 }

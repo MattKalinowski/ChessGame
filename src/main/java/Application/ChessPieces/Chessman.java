@@ -7,5 +7,4 @@ public interface Chessman {
     Position getPosition();
     void setPosition(Position position);
     Team getTeam();
-    void setCaptured();
 }

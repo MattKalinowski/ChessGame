@@ -1,7 +1,6 @@
 
 import Application.ChessPieces.*;
 import Application.Chessboard.Board;
-import Application.Chessboard.Ownership;
 import Application.Chessboard.Position;
 import org.junit.*;
 
@@ -23,19 +22,9 @@ public class PawnTest {
         Pawn whitePawn = new Pawn(Team.WHITE);
         Position positionWhite = Board.BOARD.getPosition('d', 2);
         whitePawn.setPosition(positionWhite);
-        Board.BOARD.getPosition('d', 3).setOwner(Ownership.WHITE);
+        Board.BOARD.getPosition('d', 3).setChessman(new Pawn(Team.WHITE));
         whitePawn.move('d', 3);
-        Board.BOARD.getPosition('d', 3).setOwner(Ownership.NEUTRAL);
-        assertEquals("[d,2]", whitePawn.getPosition().toString());
-    }
-
-    @Test
-    public void testMovementWhileCaptured() {
-        Pawn whitePawn = new Pawn(Team.WHITE);
-        Position positionWhite = Board.BOARD.getPosition('d', 2);
-        whitePawn.setPosition(positionWhite);
-        whitePawn.setCaptured();
-        whitePawn.move('d', 3);
+        Board.BOARD.getPosition('d', 3).setChessman(new Phantom());
         assertEquals("[d,2]", whitePawn.getPosition().toString());
     }
 
@@ -44,9 +33,9 @@ public class PawnTest {
         Pawn whitePawn = new Pawn(Team.WHITE);
         Position positionWhite = Board.BOARD.getPosition('d', 2);
         whitePawn.setPosition(positionWhite);
-        Board.BOARD.getPosition('c', 3).setOwner(Ownership.BLACK);
+        Board.BOARD.getPosition('c', 3).setChessman(new Pawn(Team.BLACK));
         whitePawn.move('c', 3);
-        Board.BOARD.getPosition('c', 3).setOwner(Ownership.NEUTRAL);
+        Board.BOARD.getPosition('c', 3).setChessman(new Phantom());
         assertEquals("[c,3]", whitePawn.getPosition().toString());
     }
 
@@ -55,9 +44,9 @@ public class PawnTest {
         Pawn whitePawn = new Pawn(Team.WHITE);
         Position positionWhite = Board.BOARD.getPosition('d', 2);
         whitePawn.setPosition(positionWhite);
-        Board.BOARD.getPosition('e', 3).setOwner(Ownership.BLACK);
+        Board.BOARD.getPosition('e', 3).setChessman(new Pawn(Team.BLACK));
         whitePawn.move('e', 3);
-        Board.BOARD.getPosition('e', 3).setOwner(Ownership.NEUTRAL);
+        Board.BOARD.getPosition('e', 3).setChessman(new Phantom());
         assertEquals("[e,3]", whitePawn.getPosition().toString());
     }
 
@@ -66,9 +55,9 @@ public class PawnTest {
         Pawn whitePawn1 = new Pawn(Team.WHITE);
         Position positionWhite = Board.BOARD.getPosition('d', 2);
         whitePawn1.setPosition(positionWhite);
-        Board.BOARD.getPosition('c', 3).setOwner(Ownership.WHITE);
+        Board.BOARD.getPosition('c', 3).setChessman(new Pawn(Team.WHITE));
         whitePawn1.move('c', 3);
-        Board.BOARD.getPosition('c', 3).setOwner(Ownership.NEUTRAL);
+        Board.BOARD.getPosition('c', 3).setChessman(new Phantom());
         assertEquals("[d,2]", whitePawn1.getPosition().toString());
     }
 
@@ -77,9 +66,9 @@ public class PawnTest {
         Pawn whitePawn1 = new Pawn(Team.WHITE);
         Position positionWhite = Board.BOARD.getPosition('d', 2);
         whitePawn1.setPosition(positionWhite);
-        Board.BOARD.getPosition('e', 3).setOwner(Ownership.WHITE);
+        Board.BOARD.getPosition('e', 3).setChessman(new Pawn(Team.WHITE));
         whitePawn1.move('e', 3);
-        Board.BOARD.getPosition('e', 3).setOwner(Ownership.NEUTRAL);
+        Board.BOARD.getPosition('e', 3).setChessman(new Phantom());
         assertEquals("[d,2]", whitePawn1.getPosition().toString());
     }
 

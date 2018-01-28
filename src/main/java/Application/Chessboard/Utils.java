@@ -1,9 +1,7 @@
 package Application.Chessboard;
 
-import Application.ChessPieces.Chessman;
 import Application.ChessPieces.Team;
 
-import java.util.List;
 
 import static Application.Chessboard.Board.BOARD;
 
@@ -14,7 +12,7 @@ public class Utils {
     }
 
     public static boolean isNotAlly(char x, int y, Team team) {
-        return !Board.BOARD.getPosition(x,y).getOwner().toString().equals(team.toString());
+        return Board.BOARD.getPosition(x,y).getChessman().getTeam() != team;
     }
 
     public static boolean isPermeableAdjacently(char x, int y, Position position) {
@@ -25,7 +23,7 @@ public class Utils {
             int start = Math.min(position.getX(), x) - 97;
             int end = Math.max(position.getX(), x) - 97;
             for (int i = start; i < end; i++) {
-                if(row[i].getOwner() != Ownership.NEUTRAL)
+                if(row[i].getChessman().getTeam() != Team.NEUTRAL)
                     return false;
             }
         }
@@ -34,7 +32,7 @@ public class Utils {
             int start = Math.min(rowIndex, Math.abs(position.getY() - 8)) + 1;
             int end = Math.max(rowIndex, Math.abs(position.getY() - 8)) - 1;
             for (int i = start; i <= end; i++) {
-                if (board[i][column].getOwner() != Ownership.NEUTRAL)
+                if (board[i][column].getChessman().getTeam() != Team.NEUTRAL)
                     return false;
             }
         }
@@ -53,25 +51,12 @@ public class Utils {
         int endX = Math.max(targetColumn, currentColumn) - 1;
         for (int i = startY; i <= endY; i++) {
             for (int j = startX; j <= endX; j++) {
-                if (board[i][j].getOwner() != Ownership.NEUTRAL)
+                if (board[i][j].getChessman().getTeam() != Team.NEUTRAL)
                     return false;
             }
         }
 
         return true;
-    }
-
-    public static Ownership getOwnership(Team team) {
-        switch (team) {
-            case WHITE: return Ownership.WHITE;
-            case BLACK: return Ownership.BLACK;
-        }
-        return Ownership.NEUTRAL;
-    }
-
-    public static void captureEnemy(List<Chessman> active, int index, List<Chessman> captured) {
-        captured.add(active.get(index));
-        active.get(index).setCaptured();
     }
 
 }

@@ -46,12 +46,27 @@ public enum Board {
     }
 
     public static void showBoard() {
-        for (Position[] i : Board.BOARD.getInstance()) {
-            for (Position j : i) {
-                System.out.print(j + " ");
+        Position[][] board = BOARD.getInstance();
+        char x = 97;
+
+        System.out.print(" ");
+        for (int i = 0; i < 8; i++) {
+            System.out.print("  " + (x++) + "  ");
+        }
+
+        System.out.println();
+        for (int i = 0; i < board.length; i++) {
+            Position[] row = board[i];
+            for (int j = 0; j < row.length; j++) {
+                Position position = row[j];
+                if (j == 0) {
+                    System.out.print(position.getY() + " ");
+                }
+                System.out.print(position.getChessman() + " ");
             }
             System.out.println();
         }
+
     }
 
 }
