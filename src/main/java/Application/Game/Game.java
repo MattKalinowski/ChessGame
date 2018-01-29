@@ -7,7 +7,7 @@ import Application.Chessboard.Position;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
+import java.util.concurrent.ExecutorCompletionService;
 
 import static Application.Chessboard.Board.BOARD;
 import static Application.Chessboard.Board.showBoard;
@@ -25,7 +25,7 @@ public class Game {
         setupGame(whiteTeam, blackTeam);
         while (true) {
             showBoard();
-            System.out.println("Current player: " + currentPlayer);
+            System.out.println("\nCurrent player: " + currentPlayer);
             makeMove();
             setCurrentPlayer();
         }
@@ -40,26 +40,16 @@ public class Game {
         }
     }
 
-    /*
-        The point is to make a method taking a String as an input and using regex to extract moves
-        Example: "a1 to a4"
-        would be:  x1 = a, y1 = 1; x2 = a, y2 = 4;
-     */
-
     private void makeMove() {
         Scanner sc = new Scanner(System.in);
+        System.out.print("Move(xy/xy): ");
         String move = sc.next();
-        Pattern px1 = Pattern.compile("[a-h^\\s]*");
-        Pattern py1 = Pattern.compile("[1-8^\\s]");
-        Pattern px2 = Pattern.compile("");
-        Pattern py2 = Pattern.compile("");
-        /*
-        char x1 = sc.next().charAt(0);
-        int y1 = sc.nextInt();
-        char x2 = sc.next().charAt(0);
-        int y2 = sc.nextInt();
+        char x1 = move.charAt(0);
+        int y1 = Integer.parseInt(move.substring(1,2));
+        char x2 = move.charAt(3);
+        int y2 = Integer.parseInt(move.substring(4));
         executeMove(x1, y1, x2, y2);
-        */
+
     }
 
     private void executeMove(char fromX, int fromY, char toX, int toY) {
@@ -69,7 +59,7 @@ public class Game {
     private static void setupGame(List<Chessman> whiteTeam, List<Chessman> blackTeam) {
         newTeam(whiteTeam, Team.WHITE);
         newTeam(blackTeam, Team.BLACK);
-        arrangePieces(blackTeam, whiteTeam, Board.BOARD.getInstance());
+        arrangePieces(whiteTeam, blackTeam, Board.BOARD.getInstance());
     }
 
     private static void newTeam(List<Chessman> set, Team team) {

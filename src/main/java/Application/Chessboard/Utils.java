@@ -20,8 +20,8 @@ public class Utils {
         int rowIndex = Math.abs(y-8);
         if (position.getX() - x != 0) {
             Position[] row = board[rowIndex];
-            int start = Math.min(position.getX(), x) - 97;
-            int end = Math.max(position.getX(), x) - 97;
+            int start = Math.min(position.getX(), x) - 97 + 1;
+            int end = Math.max(position.getX(), x) - 97 - 1;
             for (int i = start; i < end; i++) {
                 if(row[i].getChessman().getTeam() != Team.NEUTRAL)
                     return false;
@@ -49,10 +49,23 @@ public class Utils {
         int startX = Math.min(targetColumn, currentColumn) + 1;
         int endY = Math.max(targetRow, currentRow) - 1;
         int endX = Math.max(targetColumn, currentColumn) - 1;
-        for (int i = startY; i <= endY; i++) {
-            for (int j = startX; j <= endX; j++) {
-                if (board[i][j].getChessman().getTeam() != Team.NEUTRAL)
-                    return false;
+        int q = endX;
+        int p = startX;
+        if (startY < endY) {
+            for (int i = startY; i <= endY; i++) {
+                for (int j = startX; j <= endX; j++) {
+                    if (board[i][q].getChessman().getTeam() != Team.NEUTRAL)
+                        return false;
+                }
+                q--;
+            }
+        } else {
+            for (int i = startY; i <= endY; i++) {
+                for (int j = startX; j <= endX; j++) {
+                    if (board[i][p].getChessman().getTeam() != Team.NEUTRAL)
+                        return false;
+                }
+                p++;
             }
         }
 

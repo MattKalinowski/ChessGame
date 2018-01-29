@@ -49,6 +49,7 @@ public enum Board {
         Position[][] board = BOARD.getInstance();
         char x = 97;
 
+        System.out.println();
         System.out.print(" ");
         for (int i = 0; i < 8; i++) {
             System.out.print("  " + (x++) + "  ");

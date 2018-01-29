@@ -34,7 +34,9 @@ public class BishopTest {
         Bishop bishop = new Bishop(WHITE);
         Position position = BOARD.getPosition('h', 7);
         bishop.setPosition(position);
+        BOARD.getPosition('f',5).setChessman(new Pawn(WHITE));
         bishop.move('e', 4);
+        BOARD.getPosition('f',5).setChessman(new Phantom());
         assertEquals("[h,7]", bishop.getPosition().toString());
     }
 
