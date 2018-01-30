@@ -24,17 +24,23 @@ public class Game {
             System.out.println("\nCurrent player: " + currentPlayer);
             makeMove();
         }
+
     }
 
     private void makeMove() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Move(xy/xy): ");
         String move = sc.next();
-        char x1 = move.charAt(0);
-        int y1 = Integer.parseInt(move.substring(1,2));
-        char x2 = move.charAt(3);
-        int y2 = Integer.parseInt(move.substring(4));
-        executeMove(x1, y1, x2, y2);
+        if (move.matches("[a-h][1-8]/[a-h][1-8]")) {
+            char x1 = move.charAt(0);
+            int y1 = Integer.parseInt(move.substring(1, 2));
+            char x2 = move.charAt(3);
+            int y2 = Integer.parseInt(move.substring(4));
+            if (currentPlayer == BOARD.getPosition(x1,y1).getChessman().getTeam())
+            executeMove(x1, y1, x2, y2);
+        } else {
+            System.out.println("Command should match pattern xy/xy, based on coordinates on the chessboard.");
+        }
     }
 
     private void executeMove(char fromX, int fromY, char toX, int toY) {

@@ -5,6 +5,7 @@ import Application.Chessboard.Position;
 import static Application.Chessboard.Board.BOARD;
 import static Application.Chessboard.Utils.inBounds;
 import static Application.Chessboard.Utils.isNotAlly;
+import static Application.Chessboard.Utils.relocate;
 
 public class Knight implements Chessman {
 
@@ -24,10 +25,7 @@ public class Knight implements Chessman {
         Position target = BOARD.getPosition(x,y);
         if ((Math.abs(position.getX() - x) == 2 && Math.abs(position.getY() - y) == 1)
                 || ((Math.abs(position.getX() - x) == 1 && Math.abs(position.getY() - y) == 2))) {
-            position.setChessman(new Phantom());
-            position.getChessman().setPosition(position);
-            setPosition(target);
-            target.setChessman(this);
+            relocate(this, position, target);
         }
     }
 

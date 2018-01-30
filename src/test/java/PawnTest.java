@@ -49,6 +49,19 @@ public class PawnTest {
     }
 
     @Test
+    public void evolveToQueenTest() {
+        Pawn pawn = new Pawn(Team.WHITE);
+        Position position = Board.BOARD.getPosition('a', 2);
+        Position position2 = Board.BOARD.getPosition('a', 7);
+        pawn.setPosition(position);
+        pawn.move('a', 3);
+        pawn.setPosition(position2);
+        pawn.move('a',8);
+        Board.BOARD.getPosition('a',3).setChessman(new Phantom());
+        assertEquals("[WQ]", Board.BOARD.getPosition('a',8).getChessman().toString());
+    }
+
+    @Test
     public void testCrossMovementLeftToCaptureEnemy() {
         Pawn whitePawn = new Pawn(Team.WHITE);
         Position positionWhite = Board.BOARD.getPosition('d', 2);

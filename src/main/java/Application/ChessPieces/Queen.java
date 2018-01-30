@@ -23,16 +23,10 @@ public class Queen implements Chessman {
     private void moveScript(char x, int y) {
         Position target = BOARD.getPosition(x,y);
         if ((Math.abs(position.getX() - x) == Math.abs(position.getY() - y)) && isPermeableDiagonally(x, y, position)) {
-            position.setChessman(new Phantom());
-            position.getChessman().setPosition(position);
-            setPosition(target);
-            target.setChessman(this);
+            relocate(this, position, target);
         } else if (((x != position.getX() && y == position.getY()) || (x == position.getX() && y != position.getY()))
                 && isPermeableAdjacently(x, y, position)) {
-            position.setChessman(new Phantom());
-            position.getChessman().setPosition(position);
-            setPosition(target);
-            target.setChessman(this);
+            relocate(this, position, target);
         }
     }
 

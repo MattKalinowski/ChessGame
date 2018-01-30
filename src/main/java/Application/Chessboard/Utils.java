@@ -1,5 +1,7 @@
 package Application.Chessboard;
 
+import Application.ChessPieces.Chessman;
+import Application.ChessPieces.Phantom;
 import Application.ChessPieces.Team;
 
 
@@ -70,6 +72,13 @@ public class Utils {
         }
 
         return true;
+    }
+
+    public static void relocate(Chessman chessman, Position currentPosition, Position targetPosition) {
+        currentPosition.setChessman(new Phantom());
+        currentPosition.getChessman().setPosition(currentPosition);
+        chessman.setPosition(targetPosition);
+        targetPosition.setChessman(chessman);
     }
 
 }
