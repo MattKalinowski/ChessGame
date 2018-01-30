@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 public class PawnTest {
 
     @Test
-    public void testForwardMovementWithNoObstacles() {
+    public void testSingleForwardMovementWithNoObstacles() {
         Pawn pawn = new Pawn(Team.WHITE);
         Position position = Board.BOARD.getPosition('a', 7);
         pawn.setPosition(position);
@@ -18,7 +18,7 @@ public class PawnTest {
     }
 
     @Test
-    public void testForwardMovementWithObstacle() {
+    public void testSingleForwardMovementWithObstacle() {
         Pawn whitePawn = new Pawn(Team.WHITE);
         Position positionWhite = Board.BOARD.getPosition('d', 2);
         whitePawn.setPosition(positionWhite);
@@ -26,6 +26,26 @@ public class PawnTest {
         whitePawn.move('d', 3);
         Board.BOARD.getPosition('d', 3).setChessman(new Phantom());
         assertEquals("[d,2]", whitePawn.getPosition().toString());
+    }
+
+    @Test
+    public void testDoubleForwardMovementWithNoObstacles() {
+        Pawn pawn = new Pawn(Team.WHITE);
+        Position position = Board.BOARD.getPosition('b', 2);
+        pawn.setPosition(position);
+        pawn.move('b', 4);
+        assertEquals("[b,4]", pawn.getPosition().toString());
+    }
+
+    @Test
+    public void testDoubleForwardMovementWithObstacle() {
+        Pawn whitePawn = new Pawn(Team.WHITE);
+        Position positionWhite = Board.BOARD.getPosition('b', 2);
+        whitePawn.setPosition(positionWhite);
+        Board.BOARD.getPosition('b', 3).setChessman(new Pawn(Team.WHITE));
+        whitePawn.move('b', 4);
+        Board.BOARD.getPosition('b', 3).setChessman(new Phantom());
+        assertEquals("[b,2]", whitePawn.getPosition().toString());
     }
 
     @Test

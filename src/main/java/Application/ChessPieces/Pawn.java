@@ -4,6 +4,7 @@ import Application.Chessboard.Position;
 
 import static Application.ChessPieces.Pawn.Direction.*;
 import static Application.Chessboard.Board.BOARD;
+import static Application.Chessboard.Utils.isPermeableAdjacently;
 
 public class Pawn implements Chessman {
 
@@ -43,7 +44,7 @@ public class Pawn implements Chessman {
             target.setChessman(this);
         }
         if (((this.direction == UP && position.getY() == 2) || (this.direction == DOWN && position.getY() == 7))
-                && (y == position.getY() + (2 * direction))) {
+                && (y == position.getY() + (2 * direction)) && isPermeableAdjacently(x,y,position)) {
             position.setChessman(new Phantom());
             position.getChessman().setPosition(position);
             setPosition(target);
