@@ -23,6 +23,7 @@ public class Bishop implements Chessman {
         Position target = BOARD.getPosition(x, y);
         if (((Math.abs(position.getX() - x)) == (Math.abs(position.getY() - y)))) {
             position.setChessman(new Phantom());
+            position.getChessman().setPosition(position);
             setPosition(target);
             target.setChessman(this);
         }

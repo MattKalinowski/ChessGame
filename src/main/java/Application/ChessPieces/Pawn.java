@@ -31,12 +31,21 @@ public class Pawn implements Chessman {
         if (Math.abs(position.getX() - x) == 1 && (y == position.getY() + direction)
                 && (BOARD.getPosition(x,y).getChessman().getTeam() == enemyTeam())) {
             position.setChessman(new Phantom());
+            position.getChessman().setPosition(position);
             setPosition(target);
             target.setChessman(this);
         }
         if ((position.getX() == x) && (y == position.getY() + direction)
                 && (BOARD.getPosition(x,y).getChessman().getTeam() == Team.NEUTRAL)) {
             position.setChessman(new Phantom());
+            position.getChessman().setPosition(position);
+            setPosition(target);
+            target.setChessman(this);
+        }
+        if (((this.direction == UP && position.getY() == 2) || (this.direction == DOWN && position.getY() == 7))
+                && (y == position.getY() + (2 * direction))) {
+            position.setChessman(new Phantom());
+            position.getChessman().setPosition(position);
             setPosition(target);
             target.setChessman(this);
         }

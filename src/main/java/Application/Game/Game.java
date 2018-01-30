@@ -7,36 +7,22 @@ import Application.Chessboard.Position;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.ExecutorCompletionService;
 
 import static Application.Chessboard.Board.BOARD;
 import static Application.Chessboard.Board.showBoard;
 
 public class Game {
 
-    private Team currentPlayer = Team.WHITE;
     private List<Chessman> whiteTeam = new ArrayList<Chessman>();
     private List<Chessman> blackTeam = new ArrayList<Chessman>();
-    private List<Chessman> capturedWhites = new ArrayList<Chessman>();
-    private List<Chessman> capturedBlacks = new ArrayList<Chessman>();
+    private Team currentPlayer = Team.WHITE;
 
     public void play() {
-
         setupGame(whiteTeam, blackTeam);
         while (true) {
             showBoard();
             System.out.println("\nCurrent player: " + currentPlayer);
             makeMove();
-            setCurrentPlayer();
-        }
-    }
-
-    private void setCurrentPlayer() {
-        switch (currentPlayer) {
-            case BLACK: currentPlayer = Team.WHITE;
-                break;
-            case WHITE: currentPlayer = Team.BLACK;
-                break;
         }
     }
 
@@ -49,20 +35,31 @@ public class Game {
         char x2 = move.charAt(3);
         int y2 = Integer.parseInt(move.substring(4));
         executeMove(x1, y1, x2, y2);
-
     }
 
     private void executeMove(char fromX, int fromY, char toX, int toY) {
-        BOARD.getPosition(fromX,fromY).getChessman().move(toX,toY);
+        Chessman chessman = BOARD.getPosition(fromX,fromY).getChessman();
+        chessman.move(toX,toY);
+        if (chessman.getPosition().getX() == toX && chessman.getPosition().getY() == toY)
+        switchCurrentPlayer();
     }
 
-    private static void setupGame(List<Chessman> whiteTeam, List<Chessman> blackTeam) {
+    private void switchCurrentPlayer() {
+        switch (currentPlayer) {
+            case BLACK: currentPlayer = Team.WHITE;
+                break;
+            case WHITE: currentPlayer = Team.BLACK;
+                break;
+        }
+    }
+
+    private void setupGame(List<Chessman> whiteTeam, List<Chessman> blackTeam) {
         newTeam(whiteTeam, Team.WHITE);
         newTeam(blackTeam, Team.BLACK);
         arrangePieces(whiteTeam, blackTeam, Board.BOARD.getInstance());
     }
 
-    private static void newTeam(List<Chessman> set, Team team) {
+    private void newTeam(List<Chessman> set, Team team) {
         for (int i = 0; i < 8; i++) {
             set.add(new Pawn(team));
         }
@@ -76,7 +73,7 @@ public class Game {
         set.add(new Rook(team));
     }
 
-    private static void arrangePieces(List<Chessman> team1, List<Chessman> team2, Position[][] board) {
+    private void arrangePieces(List<Chessman> team1, List<Chessman> team2, Position[][] board) {
         int row = 0;
         for (Position[] i : board) {
             int column = 0;
@@ -104,16 +101,6 @@ public class Game {
             row++;
         }
 
-    }
-
-    private static void previewPiecePositions(List<Chessman> team1, List<Chessman> team2) {
-        for (Chessman c : team1) {
-            System.out.println(c + " is on position " + c.getPosition());
-        }
-        System.out.println();
-        for (Chessman c : team2) {
-            System.out.println(c + " is on position " + c.getPosition());
-        }
     }
 
 }

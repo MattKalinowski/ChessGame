@@ -25,6 +25,7 @@ public class Knight implements Chessman {
         if ((Math.abs(position.getX() - x) == 2 && Math.abs(position.getY() - y) == 1)
                 || ((Math.abs(position.getX() - x) == 1 && Math.abs(position.getY() - y) == 2))) {
             position.setChessman(new Phantom());
+            position.getChessman().setPosition(position);
             setPosition(target);
             target.setChessman(this);
         }

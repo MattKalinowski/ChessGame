@@ -13,6 +13,7 @@ public class Position {
         this.x = x;
         this.y = y;
         this.chessman = new Phantom();
+        chessman.setPosition(this);
     }
 
     public int getX() {
@@ -33,7 +34,7 @@ public class Position {
 
     @Override
     public String toString() {
-        return "[" + x +","+ y + "]"; // here, instead of this I can use "[] + chessman + "]"
+        return "[" + x +","+ y + "]";
     }
 }
 

@@ -23,6 +23,7 @@ public class Rook implements Chessman {
         Position target = BOARD.getPosition(x, y);
         if (((x != position.getX() && y == position.getY()) || (x == position.getX() && y != position.getY()))) {
             position.setChessman(new Phantom());
+            position.getChessman().setPosition(position);
             setPosition(target);
             target.setChessman(this);
         }

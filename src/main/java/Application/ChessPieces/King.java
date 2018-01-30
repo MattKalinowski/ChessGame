@@ -26,6 +26,7 @@ public class King implements Chessman {
         int distanceY = Math.abs(position.getY() - y);
         if ((distanceX == 1 || distanceY == 1 || (distanceX == 1 && distanceY == 1))) {
             position.setChessman(new Phantom());
+            position.getChessman().setPosition(position);
             setPosition(target);
             target.setChessman(this);
 
