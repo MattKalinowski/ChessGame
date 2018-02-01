@@ -1,6 +1,6 @@
 # Chess game
 
-The following project is a classic chess game. 
+The following project is a classic chess game. The game is designed for two players matches, AI is not included. 
 
 ## Gameplay
 
