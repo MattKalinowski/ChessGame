@@ -14,94 +14,94 @@ public class QueenTest {
     @Test
     public void testAdjacentMovementOne() {
         Queen queen = new Queen(WHITE);
-        Position position = BOARD.getPosition('e', 2);
+        Position position = BOARD.getPosition(4,6);
         queen.setPosition(position);
-        queen.move('e', 1);
-        BOARD.getPosition('e',1).setChessman(new Phantom());
-        assertEquals("[e,1]", queen.getPosition().toString());
+        queen.move(4,7);
+        BOARD.getPosition(4,7).setChessman(new Phantom());
+        assertEquals("[4,7]", queen.getPosition().toString());
     }
 
     @Test
     public void testAdjacentMovementTwo() {
         Queen queen = new Queen(WHITE);
-        Position position = BOARD.getPosition('e', 2);
+        Position position = BOARD.getPosition(4,6);
         queen.setPosition(position);
-        queen.move('d', 2);
-        BOARD.getPosition('d',2).setChessman(new Phantom());
-        assertEquals("[d,2]", queen.getPosition().toString());
+        queen.move(3,6);
+        BOARD.getPosition(3,6).setChessman(new Phantom());
+        assertEquals("[3,6]", queen.getPosition().toString());
     }
 
     @Test
     public void testDiagonalMovementOne() {
         Queen queen = new Queen(WHITE);
-        Position position = BOARD.getPosition('e', 2);
+        Position position = BOARD.getPosition(4,6);
         queen.setPosition(position);
-        queen.move('d', 1);
-        BOARD.getPosition('d',1).setChessman(new Phantom());
-        assertEquals("[d,1]", queen.getPosition().toString());
+        queen.move(3,7);
+        BOARD.getPosition(3,7).setChessman(new Phantom());
+        assertEquals("[3,7]", queen.getPosition().toString());
     }
 
     @Test
     public void testDiagonalMovementTwo() {
         Queen queen = new Queen(WHITE);
-        Position position = BOARD.getPosition('e', 2);
+        Position position = BOARD.getPosition(4,6);
         queen.setPosition(position);
-        queen.move('d', 3);
-        BOARD.getPosition('d',3).setChessman(new Phantom());
-        assertEquals("[d,3]", queen.getPosition().toString());
+        queen.move(3,5);
+        BOARD.getPosition(3,5).setChessman(new Phantom());
+        assertEquals("[3,5]", queen.getPosition().toString());
     }
 
     @Test
     public void testMovementWithObstacleOne() {
         Queen queen = new Queen(WHITE);
-        Position position = BOARD.getPosition('e', 3);
+        Position position = BOARD.getPosition(4,5);
         queen.setPosition(position);
-        BOARD.getPosition('d',4).setChessman(new Pawn(WHITE));
-        queen.move('c', 5);
-        BOARD.getPosition('d',4).setChessman(new Phantom());
-        assertEquals("[e,3]", queen.getPosition().toString());
+        BOARD.getPosition(3,4).setChessman(new Pawn(WHITE));
+        queen.move(2,3);
+        BOARD.getPosition(3,4).setChessman(new Phantom());
+        assertEquals("[4,5]", queen.getPosition().toString());
     }
 
     @Test
     public void testMovementWithObstacleTwo() {
         Queen queen = new Queen(WHITE);
-        Position position = BOARD.getPosition('e', 3);
+        Position position = BOARD.getPosition(4,5);
         queen.setPosition(position);
-        BOARD.getPosition('e',4).setChessman(new Pawn(WHITE));
-        queen.move('e', 5);
-        BOARD.getPosition('e',4).setChessman(new Phantom());
-        assertEquals("[e,3]", queen.getPosition().toString());
+        BOARD.getPosition(4,4).setChessman(new Pawn(WHITE));
+        queen.move(4,3);
+        BOARD.getPosition(4,4).setChessman(new Phantom());
+        assertEquals("[4,5]", queen.getPosition().toString());
     }
 
     @Test
     public void testMovementToBeatEnemy() {
         Queen queen = new Queen(WHITE);
-        Position position = BOARD.getPosition('e', 3);
+        Position position = BOARD.getPosition(4,5);
         queen.setPosition(position);
-        BOARD.getPosition('e',4).setChessman(new Pawn(BLACK));
-        queen.move('e', 4);
-        BOARD.getPosition('e',4).setChessman(new Phantom());
-        assertEquals("[e,4]", queen.getPosition().toString());
+        BOARD.getPosition(4,4).setChessman(new Pawn(BLACK));
+        queen.move(4,4);
+        BOARD.getPosition(4,4).setChessman(new Phantom());
+        assertEquals("[4,4]", queen.getPosition().toString());
     }
 
     @Test
     public void testMovementToAllyPosition() {
         Queen queen = new Queen(WHITE);
-        Position position = BOARD.getPosition('e', 3);
+        Position position = BOARD.getPosition(4,5);
         queen.setPosition(position);
-        BOARD.getPosition('e',4).setChessman(new Pawn(WHITE));
-        queen.move('e', 4);
-        BOARD.getPosition('e',4).setChessman(new Phantom());
-        assertEquals("[e,3]", queen.getPosition().toString());
+        BOARD.getPosition(4,4).setChessman(new Pawn(WHITE));
+        queen.move(4,4);
+        BOARD.getPosition(4,4).setChessman(new Phantom());
+        assertEquals("[4,5]", queen.getPosition().toString());
     }
 
     @Test
     public void testMovementOutOfBounds() {
         Queen queen = new Queen(WHITE);
-        Position position = BOARD.getPosition('e', 2);
+        Position position = BOARD.getPosition(4,6);
         queen.setPosition(position);
-        queen.move('e', 0);
-        assertEquals("[e,2]", queen.getPosition().toString());
+        queen.move(4, -1);
+        assertEquals("[4,6]", queen.getPosition().toString());
     }
 
 }

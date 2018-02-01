@@ -16,12 +16,12 @@ public class Knight implements Chessman {
         this.team = team;
     }
 
-    public void move(char x, int y) {
+    public void move(int x, int y) {
         if (inBounds(x,y) && isNotAlly(x,y,team))
             moveScript(x,y);
     }
 
-    private void moveScript(char x, int y) {
+    private void moveScript(int x, int y) {
         Position target = BOARD.getPosition(x,y);
         if ((Math.abs(position.getX() - x) == 2 && Math.abs(position.getY() - y) == 1)
                 || ((Math.abs(position.getX() - x) == 1 && Math.abs(position.getY() - y) == 2))) {

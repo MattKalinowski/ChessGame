@@ -5,11 +5,11 @@ import Application.ChessPieces.Chessman;
 import Application.ChessPieces.Phantom;
 
 public class Position {
-    private char x;
+    private int x;
     private int y;
     private Chessman chessman;
 
-    public Position(char x, int y) {
+    public Position(int x, int y) {
         this.x = x;
         this.y = y;
         this.chessman = new Phantom();

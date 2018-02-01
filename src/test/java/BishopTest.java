@@ -14,59 +14,59 @@ public class BishopTest {
     @Test
     public void testMovementOne() {
         Bishop bishop = new Bishop(WHITE);
-        Position position = BOARD.getPosition('f', 6);
+        Position position = BOARD.getPosition(5, 2);
         bishop.setPosition(position);
-        bishop.move('d', 8);
-        assertEquals("[d,8]", bishop.getPosition().toString());
+        bishop.move(3, 0);
+        assertEquals("[3,0]", bishop.getPosition().toString());
     }
 
     @Test
     public void testMovementTwo() {
         Bishop bishop = new Bishop(WHITE);
-        Position position = BOARD.getPosition('f', 6);
+        Position position = BOARD.getPosition(5, 2);
         bishop.setPosition(position);
-        bishop.move('h', 8);
-        assertEquals("[h,8]", bishop.getPosition().toString());
+        bishop.move(7, 0);
+        assertEquals("[7,0]", bishop.getPosition().toString());
     }
 
     @Test
     public void testMovementWithObstacle() {
         Bishop bishop = new Bishop(WHITE);
-        Position position = BOARD.getPosition('h', 7);
+        Position position = BOARD.getPosition(7, 1);
         bishop.setPosition(position);
-        BOARD.getPosition('f',5).setChessman(new Pawn(WHITE));
-        bishop.move('e', 4);
-        BOARD.getPosition('f',5).setChessman(new Phantom());
-        assertEquals("[h,7]", bishop.getPosition().toString());
+        BOARD.getPosition(5,3).setChessman(new Pawn(WHITE));
+        bishop.move(4, 4);
+        BOARD.getPosition(5,3).setChessman(new Phantom());
+        assertEquals("[7,1]", bishop.getPosition().toString());
     }
 
     @Test
     public void testMovementToCaptureEnemy() {
         Bishop bishop = new Bishop(Team.BLACK);
-        Position position = BOARD.getPosition('h', 6);
+        Position position = BOARD.getPosition(7, 2);
         bishop.setPosition(position);
-        bishop.move('g', 5);
-        assertEquals("[g,5]", bishop.getPosition().toString());
+        bishop.move(6,3);
+        assertEquals("[6,3]", bishop.getPosition().toString());
     }
 
     @Test
     public void testMovementToAllyPosition() {
         Bishop bishop = new Bishop(WHITE);
-        Position position = BOARD.getPosition('c', 8);
+        Position position = BOARD.getPosition(2,0);
         bishop.setPosition(position);
-        BOARD.getPosition('d',7).setChessman(new Pawn(WHITE));
-        bishop.move('d', 7);
-        BOARD.getPosition('d',7).setChessman(new Phantom());
-        assertEquals("[c,8]", bishop.getPosition().toString());
+        BOARD.getPosition(3,1).setChessman(new Pawn(WHITE));
+        bishop.move(3,1);
+        BOARD.getPosition(3,1).setChessman(new Phantom());
+        assertEquals("[2,0]", bishop.getPosition().toString());
     }
 
     @Test
     public void testMovementOutOfBounds() {
         Bishop bishop = new Bishop(WHITE);
-        Position position = BOARD.getPosition('c', 8);
+        Position position = BOARD.getPosition(2,0);
         bishop.setPosition(position);
-        bishop.move('a', 10);
-        assertEquals("[c,8]", bishop.getPosition().toString());
+        bishop.move(0, -2);
+        assertEquals("[2,0]", bishop.getPosition().toString());
     }
 
 }

@@ -17,29 +17,24 @@ public enum Board {
     }
 
     private void initPositions() {
-        char x;
-        int y = 8;
-        int row = 0;
-        int column;
-        for (Position[] v : board) {
-            x = 'a';
-            column = 0;
-            for (Position h : v) {
-                h = new Position(x, y);
-                board[row][column] = h;
-                column++;
+        int x;
+        int y = 0;
+        for (Position[] i : board) {
+            x = 0;
+            for (Position j : i) {
+                j = new Position(x, y);
+                board[y][x] = j;
                 x++;
             }
-            y--;
-            row++;
+            y++;
         }
     }
 
-    public Position getPosition(char x, int y) {
-        for (Position[] v : board) {
-            for (Position h : v) {
-                if (h.getX() == x && h.getY() == y)
-                    return h;
+    public Position getPosition(int x, int y) {
+        for (Position[] i : board) {
+            for (Position j : i) {
+                if (j.getX() == x && j.getY() == y)
+                    return j;
             }
         }
         return null;
@@ -47,21 +42,18 @@ public enum Board {
 
     public static void showBoard() {
         Position[][] board = BOARD.getInstance();
-        char x = 97;
-
+        char x = 'a';
         System.out.println();
         System.out.print(" ");
         for (int i = 0; i < 8; i++) {
             System.out.print("  " + (x++) + "  ");
         }
-
         System.out.println();
-        for (int i = 0; i < board.length; i++) {
-            Position[] row = board[i];
-            for (int j = 0; j < row.length; j++) {
-                Position position = row[j];
+        for (Position[] i : board) {
+            for (int j = 0; j < i.length; j++) {
+                Position position = i[j];
                 if (j == 0) {
-                    System.out.print(position.getY() + " ");
+                    System.out.print(Math.abs((position.getY()) - 8) + " ");
                 }
                 System.out.print(position.getChessman() + " ");
             }

@@ -17,12 +17,12 @@ public class King implements Chessman {
         this.team = team;
     }
 
-    public void move(char x, int y) {
+    public void move(int x, int y) {
         if (inBounds(x,y))
         moveScript(x,y);
     }
 
-    private void moveScript(char x, int y) {
+    private void moveScript(int x, int y) {
         Position target = BOARD.getPosition(x,y);
         int distanceX = Math.abs(position.getX() - x);
         int distanceY = Math.abs(position.getY() - y);
@@ -30,13 +30,13 @@ public class King implements Chessman {
             relocate(this, position, target);
         }
         if (isRook(target) && isPermeableAdjacently(x,y,position) && !hasMoved && target.getY() == position.getY()) {
-            if (target.getX() == 'a') castling(x,y, 'c', 'd');
-            if (target.getX() == 'h') castling(x,y,'g','f');
+            if (target.getX() == 0) castling(x,y, 2, 3);
+            if (target.getX() == 7) castling(x,y,6,5);
         }
         hasMoved = true;
     }
 
-    private void castling(char x, int y, char kingX, char rookX) {
+    private void castling(int x, int y, int kingX, int rookX) {
         Position rookPosition = BOARD.getPosition(x,y);
         BOARD.getPosition(kingX,y).setChessman(this);
         BOARD.getPosition(rookX,y).setChessman(new Rook(team));

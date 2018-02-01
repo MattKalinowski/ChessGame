@@ -9,48 +9,43 @@ import static Application.Chessboard.Board.BOARD;
 
 public class Utils {
 
-    public static boolean inBounds(char x, int y) {
-        return ((x >= 'a' && x <= 'h') && (y >= 1 && y <= 8));
+    public static boolean inBounds(int x, int y) {
+        return ((x >= 0 && x <= 7) && (y >= 0 && y <= 7));
     }
 
-    public static boolean isNotAlly(char x, int y, Team team) {
+    public static boolean isNotAlly(int x, int y, Team team) {
         return Board.BOARD.getPosition(x,y).getChessman().getTeam() != team;
     }
 
-    public static boolean isPermeableAdjacently(char x, int y, Position position) {
+    public static boolean isPermeableAdjacently(int x, int y, Position position) {
         Position[][] board = BOARD.getInstance();
-        int rowIndex = Math.abs(y-8);
         if (position.getX() - x != 0) {
-            Position[] row = board[rowIndex];
-            int start = Math.min(position.getX(), x) - 97 + 1;
-            int end = Math.max(position.getX(), x) - 97 - 1;
-            for (int i = start; i < end; i++) {
+            Position[] row = board[y];
+            int start = Math.min(position.getX(), x) + 1;
+            int end = Math.max(position.getX(), x) - 1;
+            for (int i = start; i <= end; i++) {
                 if(row[i].getChessman().getTeam() != Team.NEUTRAL)
                     return false;
             }
         }
         if (position.getY() - y != 0) {
-            int column = x - 97;
-            int start = Math.min(rowIndex, Math.abs(position.getY() - 8)) + 1;
-            int end = Math.max(rowIndex, Math.abs(position.getY() - 8)) - 1;
+            int j = x;
+            int start = Math.min(y, position.getY()) + 1;
+            int end = Math.max(y, position.getY()) - 1;
             for (int i = start; i <= end; i++) {
-                if (board[i][column].getChessman().getTeam() != Team.NEUTRAL)
+                if (board[i][j].getChessman().getTeam() != Team.NEUTRAL)
                     return false;
             }
         }
         return true;
     }
 
-    public static boolean isPermeableDiagonally(char x, int y, Position position) {
+    public static boolean isPermeableDiagonally(int x, int y, Position position) {
         Position[][] board = BOARD.getInstance();
-        int targetRow = Math.abs(y-8);
-        int targetColumn = x - 97;
-        int currentRow = Math.abs(position.getY()-8);
-        int currentColumn = position.getX() - 97;
-        int startY = Math.min(targetRow, currentRow) + 1;
-        int startX = Math.min(targetColumn, currentColumn) + 1;
-        int endY = Math.max(targetRow, currentRow) - 1;
-        int endX = Math.max(targetColumn, currentColumn) - 1;
+        int startY = Math.min(y, position.getY()) + 1;
+        int startX = Math.min(x, position.getX()) + 1;
+        int endY = Math.max(y, position.getY()) - 1;
+        int endX = Math.max(x, position.getX()) - 1;
         int q = endX;
         int p = startX;
         if (startY < endY) {

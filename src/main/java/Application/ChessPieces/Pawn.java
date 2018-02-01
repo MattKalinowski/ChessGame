@@ -18,8 +18,8 @@ public class Pawn implements Chessman {
         this.team = team;
     }
 
-    public void move(char x, int y) {
-        int up = 1, down = -1;
+    public void move(int x, int y) {
+        int up = -1, down = 1;
         if (direction == null) setDirection();
         switch (direction) {
             case UP: moveScript(x, y, up);
@@ -30,7 +30,7 @@ public class Pawn implements Chessman {
         promotion();
     }
 
-    private void moveScript(char x, int y, int direction) {
+    private void moveScript(int x, int y, int direction) {
         Position target = BOARD.getPosition(x, y);
         if (Math.abs(position.getX() - x) == 1 && (y == position.getY() + direction)
                 && (target.getChessman().getTeam() == enemyTeam(team))) {
@@ -40,7 +40,7 @@ public class Pawn implements Chessman {
                 && (target.getChessman().getTeam() == Team.NEUTRAL)) {
             relocate(this, position, target);
         }
-        if (((this.direction == UP && position.getY() == 2) || (this.direction == DOWN && position.getY() == 7))
+        if (((this.direction == UP && position.getY() == 6) || (this.direction == DOWN && position.getY() == 1))
                 && (y == position.getY() + (2 * direction)) && isPermeableAdjacently(x,y,position)
                 && target.getChessman().getTeam() == Team.NEUTRAL) {
             relocate(this, position, target);
@@ -49,8 +49,8 @@ public class Pawn implements Chessman {
 
     private void setDirection() {
         int row = position.getY();
-        int upperRow = 7;
-        int lowerRow = 2;
+        int upperRow = 1;
+        int lowerRow = 6;
         if (row == upperRow) {
             direction = DOWN;
         }
@@ -60,11 +60,11 @@ public class Pawn implements Chessman {
     }
 
     private void promotion() {
-        if (direction == UP && position.getY() == 8) {
+        if (direction == UP && position.getY() == 0) {
             position.setChessman(new Queen(team));
             position.getChessman().setPosition(position);
         }
-        if (direction == DOWN && position.getY() == 1) {
+        if (direction == DOWN && position.getY() == 7) {
             position.setChessman(new Queen(team));
             position.getChessman().setPosition(position);
         }
@@ -84,8 +84,8 @@ public class Pawn implements Chessman {
 
     public int getDirection() {
         switch (direction) {
-            case UP: return 1;
-            case DOWN: return -1;
+            case UP: return -1;
+            case DOWN: return 1;
         }
         return 0;
     }

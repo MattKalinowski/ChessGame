@@ -3,6 +3,7 @@ package Application.ChessPieces;
 import Application.Chessboard.Position;
 
 public class Phantom implements Chessman {
+
     private Position position;
     private Team team;
 
@@ -10,7 +11,7 @@ public class Phantom implements Chessman {
         this.team = Team.NEUTRAL;
     }
 
-    public void move(char x, int y) {
+    public void move(int x, int y) {
         System.out.println("This field is empty.");
     }
 

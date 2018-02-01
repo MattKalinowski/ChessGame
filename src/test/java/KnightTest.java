@@ -14,60 +14,60 @@ public class KnightTest {
     @Test
     public void testFreeMovementUp() {
         Knight knight = new Knight(WHITE);
-        Position position = BOARD.getPosition('a', 1);
+        Position position = BOARD.getPosition(0,7);
         knight.setPosition(position);
-        knight.move('b', 3);
-        BOARD.getPosition('b',3).setChessman(new Phantom());
-        assertEquals("[b,3]", knight.getPosition().toString());
+        knight.move(1,5);
+        BOARD.getPosition(1,5).setChessman(new Phantom());
+        assertEquals("[1,5]", knight.getPosition().toString());
     }
 
     @Test
     public void testFreeMovementRight() {
         Knight knight = new Knight(WHITE);
-        Position position = BOARD.getPosition('a', 1);
+        Position position = BOARD.getPosition(0,7);
         knight.setPosition(position);
-        knight.move('c', 2);
-        assertEquals("[c,2]", knight.getPosition().toString());
+        knight.move(2,6);
+        assertEquals("[2,6]", knight.getPosition().toString());
     }
 
     @Test
     public void testMovementOutOfBounds() {
         Knight knight = new Knight(WHITE);
-        Position position = BOARD.getPosition('a', 1);
+        Position position = BOARD.getPosition(0,7);
         knight.setPosition(position);
-        knight.move('c', 0);
-        assertEquals("[a,1]", knight.getPosition().toString());
+        knight.move(2, 8);
+        assertEquals("[0,7]", knight.getPosition().toString());
     }
 
     @Test
     public void testMovementOutOfRange() {
         Knight knight = new Knight(WHITE);
-        Position position = BOARD.getPosition('a', 1);
+        Position position = BOARD.getPosition(0,7);
         knight.setPosition(position);
-        knight.move('b', 2);
-        assertEquals("[a,1]", knight.getPosition().toString());
+        knight.move(1,6);
+        assertEquals("[0,7]", knight.getPosition().toString());
     }
 
     @Test
     public void testMovementToCaptureEnemy() {
         Knight knight = new Knight(WHITE);
-        Position position = BOARD.getPosition('e', 1);
+        Position position = BOARD.getPosition(4,7);
         knight.setPosition(position);
-        BOARD.getPosition('f',3).setChessman(new Pawn(BLACK));
-        knight.move('f', 3);
-        BOARD.getPosition('f',3).setChessman(new Phantom());
-        assertEquals("[f,3]", knight.getPosition().toString());
+        BOARD.getPosition(5,5).setChessman(new Pawn(BLACK));
+        knight.move(5,5);
+        BOARD.getPosition(5,5).setChessman(new Phantom());
+        assertEquals("[5,5]", knight.getPosition().toString());
     }
 
     @Test
     public void testMovementBlockedByAlly() {
         Knight knight = new Knight(WHITE);
-        Position position = BOARD.getPosition('e', 5);
+        Position position = BOARD.getPosition(4,3);
         knight.setPosition(position);
-        BOARD.getPosition('d',7).setChessman(new Pawn(WHITE));
-        knight.move('d', 7);
-        BOARD.getPosition('d',7).setChessman(new Phantom());
-        assertEquals("[e,5]", knight.getPosition().toString());
+        BOARD.getPosition(3,1).setChessman(new Pawn(WHITE));
+        knight.move(3,1);
+        BOARD.getPosition(3,1).setChessman(new Phantom());
+        assertEquals("[4,3]", knight.getPosition().toString());
     }
 
 }

@@ -31,18 +31,18 @@ public class Game {
         System.out.print("Move(xy/xy): ");
         String move = sc.next();
         if (move.matches("[a-h][1-8]/[a-h][1-8]")) {
-            char x1 = move.charAt(0);
-            int y1 = Integer.parseInt(move.substring(1, 2));
-            char x2 = move.charAt(3);
-            int y2 = Integer.parseInt(move.substring(4));
-            if (currentPlayer == BOARD.getPosition(x1,y1).getChessman().getTeam())
+            int x1 = move.charAt(0) - 97;
+            int y1 = Math.abs(Integer.parseInt(move.substring(1, 2)) - 8);
+            int x2 = move.charAt(3) - 97;
+            int y2 = Math.abs(Integer.parseInt(move.substring(4)) - 8);
+            //if (currentPlayer == BOARD.getPosition(x1,y1).getChessman().getTeam())
             executeMove(x1, y1, x2, y2);
         } else {
             System.out.println("Command should match a pattern xy/xy, based on coordinates on the chessboard.");
         }
     }
 
-    private void executeMove(char fromX, int fromY, char toX, int toY) {
+    private void executeMove(int fromX, int fromY, int toX, int toY) {
         Chessman chessman = BOARD.getPosition(fromX,fromY).getChessman();
         chessman.move(toX,toY);
         if (!inCheck()) {
