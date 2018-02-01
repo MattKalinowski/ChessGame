@@ -4,6 +4,7 @@ import Application.Chessboard.Position;
 
 import static Application.ChessPieces.Pawn.Direction.*;
 import static Application.Chessboard.Board.BOARD;
+import static Application.Chessboard.Utils.enemyTeam;
 import static Application.Chessboard.Utils.isPermeableAdjacently;
 import static Application.Chessboard.Utils.relocate;
 
@@ -26,13 +27,13 @@ public class Pawn implements Chessman {
             case DOWN: moveScript(x, y, down);
             break;
         }
-        evolve();
+        promotion();
     }
 
     private void moveScript(char x, int y, int direction) {
         Position target = BOARD.getPosition(x, y);
         if (Math.abs(position.getX() - x) == 1 && (y == position.getY() + direction)
-                && (target.getChessman().getTeam() == enemyTeam())) {
+                && (target.getChessman().getTeam() == enemyTeam(team))) {
             relocate(this, position, target);
         }
         if ((position.getX() == x) && (y == position.getY() + direction)
@@ -44,11 +45,6 @@ public class Pawn implements Chessman {
                 && target.getChessman().getTeam() == Team.NEUTRAL) {
             relocate(this, position, target);
         }
-    }
-
-    private Team enemyTeam() {
-        if (Team.WHITE == team) return Team.BLACK;
-        else return Team.WHITE;
     }
 
     private void setDirection() {
@@ -63,7 +59,7 @@ public class Pawn implements Chessman {
         }
     }
 
-    private void evolve() {
+    private void promotion() {
         if (direction == UP && position.getY() == 8) {
             position.setChessman(new Queen(team));
             position.getChessman().setPosition(position);
@@ -84,6 +80,14 @@ public class Pawn implements Chessman {
 
     public Team getTeam() {
         return team;
+    }
+
+    public int getDirection() {
+        switch (direction) {
+            case UP: return 1;
+            case DOWN: return -1;
+        }
+        return 0;
     }
 
     @Override

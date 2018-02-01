@@ -81,4 +81,9 @@ public class Utils {
         targetPosition.setChessman(chessman);
     }
 
+    public static Team enemyTeam(Team team) {
+        if (Team.WHITE == team) return Team.BLACK;
+        else return Team.WHITE;
+    }
+
 }

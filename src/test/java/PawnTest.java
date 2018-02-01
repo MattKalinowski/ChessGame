@@ -49,7 +49,7 @@ public class PawnTest {
     }
 
     @Test
-    public void evolveToQueenTest() {
+    public void promotionToQueenTest() {
         Pawn pawn = new Pawn(Team.WHITE);
         Position position = Board.BOARD.getPosition('a', 2);
         Position position2 = Board.BOARD.getPosition('a', 7);

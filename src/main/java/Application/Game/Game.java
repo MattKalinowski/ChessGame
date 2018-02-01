@@ -24,7 +24,6 @@ public class Game {
             System.out.println("\nCurrent player: " + currentPlayer);
             makeMove();
         }
-
     }
 
     private void makeMove() {
@@ -39,15 +38,31 @@ public class Game {
             if (currentPlayer == BOARD.getPosition(x1,y1).getChessman().getTeam())
             executeMove(x1, y1, x2, y2);
         } else {
-            System.out.println("Command should match pattern xy/xy, based on coordinates on the chessboard.");
+            System.out.println("Command should match a pattern xy/xy, based on coordinates on the chessboard.");
         }
     }
 
     private void executeMove(char fromX, int fromY, char toX, int toY) {
         Chessman chessman = BOARD.getPosition(fromX,fromY).getChessman();
         chessman.move(toX,toY);
-        if (chessman.getPosition().getX() == toX && chessman.getPosition().getY() == toY)
-        switchCurrentPlayer();
+        if (!inCheck()) {
+            if (chessman.getPosition().getX() == toX && chessman.getPosition().getY() == toY)
+                switchCurrentPlayer();
+        } else {
+            chessman.move(fromX,fromY);
+        }
+    }
+
+    private boolean inCheck() {
+        int kingIndex = 12;
+        Position whiteKingPosition = whiteTeam.get(kingIndex).getPosition();
+        Position blackKingPosition = blackTeam.get(kingIndex).getPosition();
+        CheckEngine checkEngine = new CheckEngine(this);
+        switch (currentPlayer) {
+            case WHITE: return checkEngine.isKingExposed(whiteKingPosition);
+            case BLACK: return checkEngine.isKingExposed(blackKingPosition);
+        }
+        return false;
     }
 
     private void switchCurrentPlayer() {
@@ -109,4 +124,7 @@ public class Game {
 
     }
 
+    public Team getCurrentPlayer() {
+        return currentPlayer;
+    }
 }
