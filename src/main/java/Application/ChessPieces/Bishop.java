@@ -21,7 +21,7 @@ public class Bishop implements Chessman {
 
     private void moveScript(int x, int y) {
         Position target = BOARD.getPosition(x, y);
-        if (((Math.abs(position.getX() - x)) == (Math.abs(position.getY() - y)))) {
+        if (Math.abs(position.getX() - x) == Math.abs(position.getY() - y)) {
             relocate(this, position, target);
         }
     }

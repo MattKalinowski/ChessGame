@@ -20,7 +20,6 @@ public class Pawn implements Chessman {
 
     public void move(int x, int y) {
         int up = -1, down = 1;
-        if (direction == null) setDirection();
         switch (direction) {
             case UP: moveScript(x, y, up);
             break;
@@ -76,6 +75,7 @@ public class Pawn implements Chessman {
 
     public void setPosition(Position position) {
         this.position = position;
+        setDirection();
     }
 
     public Team getTeam() {

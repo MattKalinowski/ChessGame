@@ -35,7 +35,7 @@ public class Game {
             int y1 = Math.abs(Integer.parseInt(move.substring(1, 2)) - 8);
             int x2 = move.charAt(3) - 97;
             int y2 = Math.abs(Integer.parseInt(move.substring(4)) - 8);
-            //if (currentPlayer == BOARD.getPosition(x1,y1).getChessman().getTeam())
+            if (currentPlayer == BOARD.getPosition(x1,y1).getChessman().getTeam())
             executeMove(x1, y1, x2, y2);
         } else {
             System.out.println("Command should match a pattern xy/xy, based on coordinates on the chessboard.");
@@ -44,12 +44,19 @@ public class Game {
 
     private void executeMove(int fromX, int fromY, int toX, int toY) {
         Chessman chessman = BOARD.getPosition(fromX,fromY).getChessman();
+        int previousX = chessman.getPosition().getX();
+        int previousY = chessman.getPosition().getY();
+        Chessman targetChessman = BOARD.getPosition(toX,toY).getChessman();
         chessman.move(toX,toY);
-        if (!inCheck()) {
-            if (chessman.getPosition().getX() == toX && chessman.getPosition().getY() == toY)
-                switchCurrentPlayer();
+        if (!inCheck() && !(chessman.getPosition().getX() == previousX && chessman.getPosition().getY() == previousY)) {
+            switchCurrentPlayer();
         } else {
-            chessman.move(fromX,fromY);
+            Position currentField = BOARD.getPosition(fromX,fromY);
+            Position targetField = BOARD.getPosition(toX,toY);
+            chessman.setPosition(currentField);
+            currentField.setChessman(chessman);
+            targetField.setChessman(targetChessman);
+            targetField.getChessman().setPosition(targetField);
         }
     }
 

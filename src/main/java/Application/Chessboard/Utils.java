@@ -46,17 +46,9 @@ public class Utils {
         int startX = Math.min(x, position.getX()) + 1;
         int endY = Math.max(y, position.getY()) - 1;
         int endX = Math.max(x, position.getX()) - 1;
-        int q = endX;
         int p = startX;
-        if (startY < endY) {
-            for (int i = startY; i <= endY; i++) {
-                for (int j = startX; j <= endX; j++) {
-                    if (board[i][q].getChessman().getTeam() != Team.NEUTRAL)
-                        return false;
-                }
-                q--;
-            }
-        } else {
+        int q = endX;
+        if ((x > position.getX() && y > position.getY()) || (x < position.getX() && y < position.getY())) {
             for (int i = startY; i <= endY; i++) {
                 for (int j = startX; j <= endX; j++) {
                     if (board[i][p].getChessman().getTeam() != Team.NEUTRAL)
@@ -65,7 +57,15 @@ public class Utils {
                 p++;
             }
         }
-
+        if ((x > position.getX() && y < position.getY()) || (x < position.getX() && y > position.getY())) {
+            for (int i = startY; i <= endY; i++) {
+                for (int j = startX; j <= endX; j++) {
+                    if (board[i][q].getChessman().getTeam() != Team.NEUTRAL)
+                        return false;
+                }
+                q--;
+            }
+        }
         return true;
     }
 

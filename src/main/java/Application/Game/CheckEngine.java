@@ -5,18 +5,21 @@ import Application.Chessboard.Position;
 
 import static Application.Chessboard.Board.BOARD;
 import static Application.Chessboard.Utils.enemyTeam;
+import static Application.Chessboard.Utils.isPermeableAdjacently;
+import static Application.Chessboard.Utils.isPermeableDiagonally;
 
 class CheckEngine {
 
-    Game game;
+    private Game game;
 
     CheckEngine(Game game) {
         this.game = game;
     }
 
     boolean isKingExposed(Position kingPosition) {
-        int kingX = kingPosition.getX() - 97;
-        int kingY = Math.abs(kingPosition.getY() - 8);
+        boolean exposed = false;
+        int kingX = kingPosition.getX();
+        int kingY = kingPosition.getY();
         int row = 0;
         for (Position[] i : BOARD.getInstance()) {
             int column = 0;
@@ -24,33 +27,38 @@ class CheckEngine {
                 if (j.getChessman().getTeam() == enemyTeam(game.getCurrentPlayer())) {
                     if (j.getChessman().getClass().getSimpleName().equals("Pawn")) {
                         Pawn pawn = (Pawn)j.getChessman();
-                        int direction = pawn.getDirection() * (-1);
-                        return inRangeOfPawn(column, row, kingX, kingY, direction);
+                        int direction = pawn.getDirection();
+                        exposed = inRangeOfPawn(column, row, kingX, kingY, direction);
+                        if (exposed) return exposed;
                     }
                     if (j.getChessman().getClass().getSimpleName().equals("Knight")) {
-                        return inRangeOfKnight(column, row, kingX, kingY);
+                        exposed = inRangeOfKnight(column, row, kingX, kingY);
+                        if (exposed) return exposed;
                     }
                     if (j.getChessman().getClass().getSimpleName().equals("Bishop")) {
-                        return inRangeOfBishop(column, row, kingX, kingY, kingPosition, j);
+                        exposed = inRangeOfBishop(column, row, kingX, kingY, j);
+                        if (exposed) return exposed;
                     }
                     if (j.getChessman().getClass().getSimpleName().equals("Rook")) {
-                        return inRangeOfRook(column, row, kingX, kingY);
+                        exposed = inRangeOfRook(column, row, kingX, kingY, j);
+                        if (exposed) return exposed;
                     }
                     if (j.getChessman().getClass().getSimpleName().equals("Queen")) {
-                        return inRangeOfQueen(column, row, kingX, kingY);
+                        exposed = inRangeOfQueen(column, row, kingX, kingY, j);
+                        if (exposed) return exposed;
                     }
                     if (j.getChessman().getClass().getSimpleName().equals("King")) {
-                        return inRangeOfKing(column, row, kingX, kingY);
+                        exposed = inRangeOfKing(column, row, kingX, kingY);
+                        if (exposed) return exposed;
                     }
                 }
                 column++;
             }
             row++;
         }
-        return false;
+        return exposed;
     }
 
-    // direction is reversed because of reversed indexing on Y axis, in case of any issues this is the place for check
     private boolean inRangeOfPawn(int x, int y, int kingX, int kingY, int direction) {
         return Math.abs(x - kingX) == 1 && (kingY == y + direction);
     }
@@ -60,20 +68,28 @@ class CheckEngine {
                 || ((Math.abs(x - kingX) == 1 && Math.abs(y - kingY) == 2));
     }
 
-    private boolean inRangeOfBishop(int x, int y, int kingX, int kingY, Position kingPosition, Position position) {
-        return true;
+    private boolean inRangeOfBishop(int x, int y, int kingX, int kingY, Position position) {
+        return (Math.abs(x - kingX) == Math.abs(y - kingY)) && isPermeableDiagonally(kingX, kingY, position);
     }
 
-    private boolean inRangeOfRook(int x, int y, int kingX, int kingY) {
-        return false;
+    private boolean inRangeOfRook(int x, int y, int kingX, int kingY, Position position) {
+        return ((kingX != x && kingY == y) || (kingX == x && kingY != y)) && isPermeableAdjacently(kingX,kingY,position);
     }
 
-    private boolean inRangeOfQueen(int x, int y, int kingX, int kingY) {
+    private boolean inRangeOfQueen(int x, int y, int kingX, int kingY, Position position) {
+        if ((Math.abs(x - kingX) == Math.abs(y - kingY)) && isPermeableDiagonally(kingX,kingY,position)) {
+            return true;
+        }
+        if (((kingX != x && kingY == y) || (kingX == x && kingY != y)) && isPermeableAdjacently(kingX,kingY,position)) {
+            return true;
+        }
         return false;
     }
 
     private boolean inRangeOfKing(int x, int y, int kingX, int kingY) {
-        return false;
+        return (Math.abs(x - kingX) == 1 && Math.abs(y - kingY) == 0)
+                || (Math.abs(x - kingX) == 0 && Math.abs(y - kingY) == 1)
+                || ((Math.abs(x - kingX) == 1) && (Math.abs(y - kingY) == 1));
     }
 
 }
