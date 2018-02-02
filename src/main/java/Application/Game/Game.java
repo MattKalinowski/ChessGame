@@ -22,6 +22,7 @@ public class Game {
         while (true) {
             showBoard();
             System.out.println("\nCurrent player: " + currentPlayer);
+            if (inCheck()) System.out.println("Check!");
             makeMove();
         }
     }
@@ -31,10 +32,11 @@ public class Game {
         System.out.print("Move(xy/xy): ");
         String move = sc.next();
         if (move.matches("[a-h][1-8]/[a-h][1-8]")) {
-            int x1 = move.charAt(0) - 97;
-            int y1 = Math.abs(Integer.parseInt(move.substring(1, 2)) - 8);
-            int x2 = move.charAt(3) - 97;
-            int y2 = Math.abs(Integer.parseInt(move.substring(4)) - 8);
+            int x1, y1, x2, y2;
+            x1 = move.charAt(0) - 97;
+            y1 = Math.abs(Integer.parseInt(move.substring(1, 2)) - 8);
+            x2 = move.charAt(3) - 97;
+            y2 = Math.abs(Integer.parseInt(move.substring(4)) - 8);
             if (currentPlayer == BOARD.getPosition(x1,y1).getChessman().getTeam())
             executeMove(x1, y1, x2, y2);
         } else {
@@ -131,7 +133,7 @@ public class Game {
 
     }
 
-    public Team getCurrentPlayer() {
+    Team getCurrentPlayer() {
         return currentPlayer;
     }
 }
