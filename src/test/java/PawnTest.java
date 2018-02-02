@@ -52,13 +52,15 @@ public class PawnTest {
     public void promotionToQueenTest() {
         Pawn pawn = new Pawn(Team.WHITE);
         Position position = Board.BOARD.getPosition(0,6);
-        Position position2 = Board.BOARD.getPosition(0,1);
         pawn.setPosition(position);
-        pawn.move(0,5);
-        pawn.setPosition(position2);
-        pawn.move(0,0);
-        Board.BOARD.getPosition(0,5).setChessman(new Phantom());
+        int y = 5;
+        while (y >= 0) {
+            pawn.move(0, y);
+            Board.BOARD.getPosition(0, y+1).setChessman(new Phantom());
+            y--;
+        }
         assertEquals("[WQ]", Board.BOARD.getPosition(0,0).getChessman().toString());
+        Board.BOARD.getPosition(0,0).setChessman(new Phantom());
     }
 
     @Test

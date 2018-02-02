@@ -30,26 +30,32 @@ class CheckEngine {
                         int direction = pawn.getDirection();
                         exposed = inRangeOfPawn(column, row, kingX, kingY, direction);
                         if (exposed) return exposed;
+                        else break;
                     }
                     if (j.getChessman().getClass().getSimpleName().equals("Knight")) {
                         exposed = inRangeOfKnight(column, row, kingX, kingY);
                         if (exposed) return exposed;
+                        else break;
                     }
                     if (j.getChessman().getClass().getSimpleName().equals("Bishop")) {
                         exposed = inRangeOfBishop(column, row, kingX, kingY, j);
                         if (exposed) return exposed;
+                        else break;
                     }
                     if (j.getChessman().getClass().getSimpleName().equals("Rook")) {
                         exposed = inRangeOfRook(column, row, kingX, kingY, j);
                         if (exposed) return exposed;
+                        else break;
                     }
                     if (j.getChessman().getClass().getSimpleName().equals("Queen")) {
                         exposed = inRangeOfQueen(column, row, kingX, kingY, j);
                         if (exposed) return exposed;
+                        else break;
                     }
                     if (j.getChessman().getClass().getSimpleName().equals("King")) {
                         exposed = inRangeOfKing(column, row, kingX, kingY);
                         if (exposed) return exposed;
+                        else break;
                     }
                 }
                 column++;

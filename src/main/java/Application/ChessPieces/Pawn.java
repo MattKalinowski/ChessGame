@@ -75,7 +75,7 @@ public class Pawn implements Chessman {
 
     public void setPosition(Position position) {
         this.position = position;
-        setDirection();
+        if (direction == null) setDirection();
     }
 
     public Team getTeam() {
