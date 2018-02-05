@@ -35,11 +35,15 @@ The application is equipped in a special CheckEngine. It's responisble for deter
 
 ![7](https://user-images.githubusercontent.com/30430556/35798050-f015c412-0a61-11e8-9028-65eab85ef19e.png)
 
-Another important feature on the game is MateEngine - an algorithm that predicts a move forward to determine whether it's check or checkmate.
+Another important feature in the game is MateEngine - an algorithm that predicts a move forward to determine whether it's check or checkmate.
 
 ![8](https://user-images.githubusercontent.com/30430556/35798071-fe072cbe-0a61-11e8-85a3-ca070db62cf7.png)
 
-Have fun!
+The same mechanism is being used for establishing a stalemate situation. 
+
+![9](https://user-images.githubusercontent.com/30430556/35815613-34d80268-0a99-11e8-93d3-187a91431f94.png)
+
+
 
 
 ## Built With
