@@ -78,7 +78,7 @@ public class Utils {
 
     public static Team enemyTeam(Team team) {
         if (Team.WHITE == team) return Team.BLACK;
-        else return Team.WHITE;
+            else return Team.WHITE;
     }
 
 }

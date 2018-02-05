@@ -26,7 +26,8 @@ public class King implements Chessman {
         Position target = BOARD.getPosition(x,y);
         int distanceX = Math.abs(position.getX() - x);
         int distanceY = Math.abs(position.getY() - y);
-        if ((distanceX == 1 || distanceY == 1 || (distanceX == 1 && distanceY == 1)) && isNotAlly(x,y,team)) {
+        if (((distanceX == 1 && distanceY == 0) || (distanceX == 0 && distanceY == 1)
+                || (distanceX == 1 && distanceY == 1)) && isNotAlly(x,y,team)) {
             relocate(this, position, target);
         }
         if (isRook(target) && isPermeableAdjacently(x,y,position) && !hasMoved && target.getY() == position.getY()) {

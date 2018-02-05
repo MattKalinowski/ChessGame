@@ -15,13 +15,13 @@ public class Bishop implements Chessman {
     }
 
     public void move(int x, int y) {
-        if (inBounds(x,y) && isNotAlly(x,y,team) && isPermeableDiagonally(x, y, position))
+        if (inBounds(x,y) && isNotAlly(x,y,team))
             moveScript(x,y);
     }
 
     private void moveScript(int x, int y) {
         Position target = BOARD.getPosition(x, y);
-        if (Math.abs(position.getX() - x) == Math.abs(position.getY() - y)) {
+        if (Math.abs(position.getX() - x) == Math.abs(position.getY() - y) && isPermeableDiagonally(x, y, position)) {
             relocate(this, position, target);
         }
     }

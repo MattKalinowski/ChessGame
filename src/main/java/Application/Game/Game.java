@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import static Application.Chessboard.Board.BOARD;
 import static Application.Chessboard.Board.showBoard;
+import static Application.Chessboard.Utils.enemyTeam;
 
 public class Game {
 
@@ -21,8 +22,18 @@ public class Game {
         setupGame(whiteTeam, blackTeam);
         while (true) {
             showBoard();
-            System.out.println("\nCurrent player: " + currentPlayer);
-            if (inCheck()) System.out.println("Check!");
+            log("\nCurrent player: " + currentPlayer);
+            if (inCheck()) {
+                if (isMate()) {
+                    log("Checkmate! Player " + enemyTeam(currentPlayer) + " wins.");
+                    break;
+                }
+                log("Check!");
+            }
+            if (isStalemate()) {
+                log("Stalemate! The game ends as a draw.");
+                break;
+            }
             makeMove();
         }
     }
@@ -40,7 +51,7 @@ public class Game {
             if (currentPlayer == BOARD.getPosition(x1,y1).getChessman().getTeam())
             executeMove(x1, y1, x2, y2);
         } else {
-            System.out.println("Command should match a pattern xy/xy, based on coordinates on the chessboard.");
+            log("Command should match a pattern xy/xy, based on coordinates on the chessboard.");
         }
     }
 
@@ -62,7 +73,7 @@ public class Game {
         }
     }
 
-    private boolean inCheck() {
+    boolean inCheck() {
         int kingIndex = 12;
         Position whiteKingPosition = whiteTeam.get(kingIndex).getPosition();
         Position blackKingPosition = blackTeam.get(kingIndex).getPosition();
@@ -71,6 +82,17 @@ public class Game {
             case WHITE: return checkEngine.isKingExposed(whiteKingPosition);
             case BLACK: return checkEngine.isKingExposed(blackKingPosition);
         }
+        return false;
+    }
+
+    //method under construction
+    private boolean isMate() {
+        MateEngine mateEngine = new MateEngine(this);
+        return mateEngine.getCheckmateStatus();
+    }
+
+    //method under construction
+    private boolean isStalemate() {
         return false;
     }
 
@@ -135,5 +157,9 @@ public class Game {
 
     Team getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    private void log(String message) {
+        System.out.println(message);
     }
 }
