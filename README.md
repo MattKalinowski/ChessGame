@@ -5,9 +5,9 @@ The following project is a classic chess game. The game is designed for two play
 ## Gameplay
 
 The whole action of the game takes place in an IDE console. 
-All pieces are represented by their respective initials including first letter of a team name and first letter of a piece name. For the example White Queen would be WQ.
+All pieces are represented by their respective initials including the first letter of a team name and first letter of a piece name. For example the White Queen would be WQ.
 
-Right after starting the game, following will appear: 
+Right after starting the game, the following will appear: 
 
 ![1](https://user-images.githubusercontent.com/30430556/35797915-856c9c8a-0a61-11e8-8de9-450debf789d1.png)
 
@@ -19,11 +19,11 @@ During the White Team turn, moves of the black team are blocked and vice versa.
 
 ![3](https://user-images.githubusercontent.com/30430556/35798000-cc9d9e1a-0a61-11e8-96d6-affce7a638c4.png)
 
-Each piece has its own unque algorithm calculating possible movement, based on a real chess rules.
+Each piece has its own unque algorithm calculating possible movement, based on real chess rules.
 
 ![4](https://user-images.githubusercontent.com/30430556/35798018-dbd4ea46-0a61-11e8-9b08-0234cefb8708.png)
 
-Some algoithms are shared between multiple types of pieces. For instance: checking whether a move that player is trying to attempt is legal in a sense of permeability of a path between two coordinates.
+Some algoithms are shared between multiple types of pieces. For instance: checking whether a move that a player is trying to attempt is legal in a sense of permeability of a path between two coordinates.
 
 ![5](https://user-images.githubusercontent.com/30430556/35798030-e2f9a94c-0a61-11e8-8e43-5537250624d2.png)
 
@@ -35,7 +35,7 @@ The application is equipped in a special CheckEngine. It's responisble for deter
 
 ![7](https://user-images.githubusercontent.com/30430556/35798050-f015c412-0a61-11e8-9028-65eab85ef19e.png)
 
-Another impostant feature on the game is MateEngine - an algorithm that predicts a one move forward to determine whether it's check or checkmate.
+Another important feature on the game is MateEngine - an algorithm that predicts a move forward to determine whether it's check or checkmate.
 
 ![8](https://user-images.githubusercontent.com/30430556/35798071-fe072cbe-0a61-11e8-85a3-ca070db62cf7.png)
 
