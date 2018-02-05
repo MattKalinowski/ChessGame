@@ -23,7 +23,7 @@ Each piece has its own unque algorithm calculating possible movement, based on a
 
 ![4](https://user-images.githubusercontent.com/30430556/35798018-dbd4ea46-0a61-11e8-9b08-0234cefb8708.png)
 
-Some algoithms are shared between multiple types of pieces. For instance: checking whether a move that player is attempting to perform is legal in case of permeability of a path between two coordinates.
+Some algoithms are shared between multiple types of pieces. For instance: checking whether a move that player is trying to attempt is legal in a sense of permeability of a path between two coordinates.
 
 ![5](https://user-images.githubusercontent.com/30430556/35798030-e2f9a94c-0a61-11e8-8e43-5537250624d2.png)
 
@@ -31,13 +31,15 @@ The game will keep going untill one player wins.
 
 ![6](https://user-images.githubusercontent.com/30430556/35798041-e990a828-0a61-11e8-8c31-7a30ed716008.png)
 
-The application is equipped in a special CheckEngine. It's responisble for determining the moment in which king is in check. When king is in check, it's impossible to make a move that will not save a king.
+The application is equipped in a special CheckEngine. It's responisble for determining a moment when king is in check. When king is in check, it's impossible to make any move that will break the check.
 
 ![7](https://user-images.githubusercontent.com/30430556/35798050-f015c412-0a61-11e8-9028-65eab85ef19e.png)
 
 Another impostant feature on the game is MateEngine - an algorithm that predicts a one move forward to determine whether it's check or checkmate.
 
 ![8](https://user-images.githubusercontent.com/30430556/35798071-fe072cbe-0a61-11e8-85a3-ca070db62cf7.png)
+
+Have fun!
 
 
 ## Built With
