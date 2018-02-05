@@ -5,21 +5,41 @@ The following project is a classic chess game. The game is designed for two play
 ## Gameplay
 
 The whole action of the game takes place in an IDE console. 
-All pieces are represented by their respective initials including first letter of a team name and first letter of a piece name. For the example White Queen would be WQ.
+All pieces are represented by their respective initials including the first letter of a team name and first letter of a piece name. For example the White Queen would be WQ.
 
-Right after starting the game, following will appear: 
+Right after starting the game, the following will appear: 
 
-![zrzut ekranu 2018-01-29 o 21 38 58](https://user-images.githubusercontent.com/30430556/35533951-42bf904e-053f-11e8-9eb4-030ecabc4074.png)
+![1](https://user-images.githubusercontent.com/30430556/35797915-856c9c8a-0a61-11e8-8de9-450debf789d1.png)
 
-Moves can be performed by using commands "xy/xy", so for example if you'd like to move your pawn from e2 to e3, you should do this:
+Moves can be performed by using commands "xy/xy". For example if you'd like to move your pawn from e2 to e4, you should use command e2/e4.
 
-![zrzut ekranu 2018-01-29 o 21 39 36](https://user-images.githubusercontent.com/30430556/35534174-f5dba0aa-053f-11e8-83ec-41e1d35fc844.png)
+![2](https://user-images.githubusercontent.com/30430556/35797948-9c468646-0a61-11e8-82c7-68c81edc878e.png)
 
-![zrzut ekranu 2018-01-29 o 22 04 54](https://user-images.githubusercontent.com/30430556/35534341-7ea3089c-0540-11e8-880f-d3d03abb4b73.png)
+During the White Team turn, moves of the black team are blocked and vice versa.
 
-All pieces has their own algorithm calculating possible movement, based on a real chess rules.
+![3](https://user-images.githubusercontent.com/30430556/35798000-cc9d9e1a-0a61-11e8-96d6-affce7a638c4.png)
 
-![zrzut ekranu 2018-01-29 o 21 43 59](https://user-images.githubusercontent.com/30430556/35534437-cfe246fa-0540-11e8-9e2b-c885b600a324.png)
+Each piece has its own unque algorithm calculating possible movement, based on real chess rules.
+
+![4](https://user-images.githubusercontent.com/30430556/35798018-dbd4ea46-0a61-11e8-9b08-0234cefb8708.png)
+
+Some algoithms are shared between multiple types of pieces. For instance: checking whether a move that a player is trying to attempt is legal in a sense of permeability of a path between two coordinates.
+
+![5](https://user-images.githubusercontent.com/30430556/35798030-e2f9a94c-0a61-11e8-8e43-5537250624d2.png)
+
+The game will keep going untill one player wins.
+
+![6](https://user-images.githubusercontent.com/30430556/35798041-e990a828-0a61-11e8-8c31-7a30ed716008.png)
+
+The application is equipped in a special CheckEngine. It's responisble for determining a moment when king is in check. When king is in check, it's impossible to make any move that will break the check.
+
+![7](https://user-images.githubusercontent.com/30430556/35798050-f015c412-0a61-11e8-9028-65eab85ef19e.png)
+
+Another important feature on the game is MateEngine - an algorithm that predicts a move forward to determine whether it's check or checkmate.
+
+![8](https://user-images.githubusercontent.com/30430556/35798071-fe072cbe-0a61-11e8-85a3-ca070db62cf7.png)
+
+Have fun!
 
 
 ## Built With
