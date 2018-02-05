@@ -40,8 +40,8 @@ public class Pawn implements Chessman {
             relocate(this, position, target);
         }
         if (((this.direction == UP && position.getY() == 6) || (this.direction == DOWN && position.getY() == 1))
-                && (y == position.getY() + (2 * direction)) && isPermeableAdjacently(x,y,position)
-                && target.getChessman().getTeam() == Team.NEUTRAL) {
+                && (y == position.getY() + (2 * direction)) && x == position.getX()
+                && isPermeableAdjacently(x,y,position) && target.getChessman().getTeam() == Team.NEUTRAL) {
             relocate(this, position, target);
         }
     }

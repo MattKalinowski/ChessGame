@@ -17,8 +17,8 @@ public enum Board {
     }
 
     private void initPositions() {
-        int x;
-        int y = 0;
+        int x, y;
+        y = 0;
         for (Position[] i : board) {
             x = 0;
             for (Position j : i) {

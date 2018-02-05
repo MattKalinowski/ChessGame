@@ -20,41 +20,41 @@ class CheckEngine {
         boolean exposed = false;
         int kingX = kingPosition.getX();
         int kingY = kingPosition.getY();
-        int row = 0;
+        int y = 0;
         for (Position[] i : BOARD.getInstance()) {
-            int column = 0;
+            int x = 0;
             for (Position j : i) {
                 if (j.getChessman().getTeam() == enemyTeam(game.getCurrentPlayer())) {
                     if (j.getChessman().getClass().getSimpleName().equals("Pawn")) {
                         Pawn pawn = (Pawn)j.getChessman();
                         int direction = pawn.getDirection();
-                        exposed = inRangeOfPawn(column, row, kingX, kingY, direction);
+                        exposed = inRangeOfPawn(x, y, kingX, kingY, direction);
                         if (exposed) return exposed;
                     }
                     if (j.getChessman().getClass().getSimpleName().equals("Knight")) {
-                        exposed = inRangeOfKnight(column, row, kingX, kingY);
+                        exposed = inRangeOfKnight(x, y, kingX, kingY);
                         if (exposed) return exposed;
                     }
                     if (j.getChessman().getClass().getSimpleName().equals("Bishop")) {
-                        exposed = inRangeOfBishop(column, row, kingX, kingY, j);
+                        exposed = inRangeOfBishop(x, y, kingX, kingY, j);
                         if (exposed) return exposed;
                     }
                     if (j.getChessman().getClass().getSimpleName().equals("Rook")) {
-                        exposed = inRangeOfRook(column, row, kingX, kingY, j);
+                        exposed = inRangeOfRook(x, y, kingX, kingY, j);
                         if (exposed) return exposed;
                     }
                     if (j.getChessman().getClass().getSimpleName().equals("Queen")) {
-                        exposed = inRangeOfQueen(column, row, kingX, kingY, j);
+                        exposed = inRangeOfQueen(x, y, kingX, kingY, j);
                         if (exposed) return exposed;
                     }
                     if (j.getChessman().getClass().getSimpleName().equals("King")) {
-                        exposed = inRangeOfKing(column, row, kingX, kingY);
+                        exposed = inRangeOfKing(x, y, kingX, kingY);
                         if (exposed) return exposed;
                     }
                 }
-                column++;
+                x++;
             }
-            row++;
+            y++;
         }
         return exposed;
     }
