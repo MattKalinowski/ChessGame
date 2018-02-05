@@ -74,6 +74,7 @@ public class Utils {
         currentPosition.getChessman().setPosition(currentPosition);
         chessman.setPosition(targetPosition);
         targetPosition.setChessman(chessman);
+
     }
 
     public static Team enemyTeam(Team team) {

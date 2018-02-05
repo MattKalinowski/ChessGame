@@ -14,6 +14,7 @@ public class PawnTest {
         Position position = Board.BOARD.getPosition(0,1);
         pawn.setPosition(position);
         pawn.move(0,2);
+        Board.BOARD.getPosition(0,2).setChessman(new Phantom());
         assertEquals("[0,2]", pawn.getPosition().toString());
     }
 

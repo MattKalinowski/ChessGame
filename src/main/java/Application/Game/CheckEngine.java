@@ -1,6 +1,6 @@
 package Application.Game;
 
-import Application.ChessPieces.Pawn;
+import Application.ChessPieces.*;
 import Application.Chessboard.Position;
 
 import static Application.Chessboard.Board.BOARD;
@@ -25,29 +25,29 @@ class CheckEngine {
             int x = 0;
             for (Position j : i) {
                 if (j.getChessman().getTeam() == enemyTeam(game.getCurrentPlayer())) {
-                    if (j.getChessman().getClass().getSimpleName().equals("Pawn")) {
+                    if (j.getChessman() instanceof Pawn) {
                         Pawn pawn = (Pawn)j.getChessman();
                         int direction = pawn.getDirection();
                         exposed = inRangeOfPawn(x, y, kingX, kingY, direction);
                         if (exposed) return exposed;
                     }
-                    if (j.getChessman().getClass().getSimpleName().equals("Knight")) {
+                    if (j.getChessman() instanceof Knight) {
                         exposed = inRangeOfKnight(x, y, kingX, kingY);
                         if (exposed) return exposed;
                     }
-                    if (j.getChessman().getClass().getSimpleName().equals("Bishop")) {
+                    if (j.getChessman() instanceof Bishop) {
                         exposed = inRangeOfBishop(x, y, kingX, kingY, j);
                         if (exposed) return exposed;
                     }
-                    if (j.getChessman().getClass().getSimpleName().equals("Rook")) {
+                    if (j.getChessman() instanceof Rook) {
                         exposed = inRangeOfRook(x, y, kingX, kingY, j);
                         if (exposed) return exposed;
                     }
-                    if (j.getChessman().getClass().getSimpleName().equals("Queen")) {
+                    if (j.getChessman() instanceof Queen) {
                         exposed = inRangeOfQueen(x, y, kingX, kingY, j);
                         if (exposed) return exposed;
                     }
-                    if (j.getChessman().getClass().getSimpleName().equals("King")) {
+                    if (j.getChessman() instanceof King) {
                         exposed = inRangeOfKing(x, y, kingX, kingY);
                         if (exposed) return exposed;
                     }

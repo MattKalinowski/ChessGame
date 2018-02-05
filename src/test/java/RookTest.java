@@ -26,6 +26,7 @@ public class RookTest {
         Position position = BOARD.getPosition(0,7);
         rook.setPosition(position);
         rook.move(0,4);
+        BOARD.getPosition(0,4).setChessman(new Phantom());
         assertEquals("[0,4]", rook.getPosition().toString());
     }
 
@@ -48,6 +49,7 @@ public class RookTest {
         rook.setPosition(rookPosition);
         BOARD.getPosition(2,4).setChessman(new Pawn(Team.BLACK));
         rook.move(2,4);
+        BOARD.getPosition(2,4).setChessman(new Phantom());
         assertEquals("[2,4]", rook.getPosition().toString());
     }
 
