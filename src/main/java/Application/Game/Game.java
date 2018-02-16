@@ -15,8 +15,8 @@ import static Application.Chessboard.Utils.enemyTeam;
 
 public class Game {
 
-    private List<Chessman> whiteTeam = new ArrayList<Chessman>();
-    private List<Chessman> blackTeam = new ArrayList<Chessman>();
+    private List<Chessman> whiteTeam = new ArrayList<>();
+    private List<Chessman> blackTeam = new ArrayList<>();
     private Team currentPlayer = WHITE;
 
     public void play() {
